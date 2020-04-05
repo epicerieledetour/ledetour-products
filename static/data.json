@@ -1,0 +1,24 @@
+{
+  "langs": {
+    "fr": {
+      "title": "Produits",
+      "new": "Nouveautées",
+      "last_update": "Mise à jour:",
+      "price_public": "Public",
+      "price_member": "Membre",
+      "other_lang_url": "/en",
+      "other_lang_text": "en",
+      "quantity": "Quantité"
+    },
+    "en": {
+      "title": "Products",
+      "new": "New items",
+      "last_update": "Last update:",
+      "price_public": "Public",
+      "price_member": "Member",
+      "other_lang_url": "/",
+      "other_lang_text": "fr",
+      "quantity": "Quantity"
+    }
+  }
+}

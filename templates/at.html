@@ -1,0 +1,83 @@
+{% set name_field = "name_" + lang %}
+{% set category_field = "category_" + lang %}
+
+{% macro item(record) -%}
+<article>
+  <h1>{{ record.fields[name_field] }}</h1>
+
+  {% if record.fields.photo %}
+  <a href="{{ record.fields.photo[0].thumbnails.full.url }}">
+    <img src="{{ record.fields.photo[0].thumbnails.large.url }}"
+         width="{{ record.fields.photo[0].thumbnails.large.width }}"
+         height="{{ record.fields.photo[0].thumbnails.large.height }}"
+         async />
+  </a>
+  {% endif %}
+
+  {% if record.fields.quantity %}
+  <h2 class="quantity-header">{{ langs[lang].quantity }}</h2>
+  <p class="quantity">{{ record.fields.quantity }}</p>
+  {% endif %}
+
+  {% if record.fields.price_public %}
+  <h2 class="public-header">{{ langs[lang].price_public }}</h2>
+  <p class="public-price">{{ record.fields.price_public }}$</p>
+  {% endif %}
+
+  {% if record.fields.price_member %}
+  <h2 class="member-header">{{ langs[lang].price_member }}</h2>
+  <p class="member-price">{{ record.fields.price_member }}$</p>
+  {% endif %}
+</article>
+{%- endmacro %}
+
+<html lang="{{ lang }}">
+
+<head>
+  <meta charset="utf-8">
+  <title>Le Détour - {{ langs[lang].title }}</title>
+  <meta name="description" content="{{ langs[lang].title }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="/icon.png">
+
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/site.css">
+
+  <meta name="theme-color" content="rgb(248, 248, 248)">
+</head>
+
+<body>
+  <header>
+    <a class="logo"
+       href="https://epicerieledetour.org">
+      <img src="https://epicerieledetour.org/wp-content/uploads/2018/05/logo_le-detour-8.png"
+           width="300"
+           height="191"
+           alt="Logo"
+           async />
+    </a>
+    <h1>{{ langs[lang].title }}</h1>
+    <a href="{{ langs[lang].other_lang_url }}">{{ langs[lang].other_lang_text }}</a>
+  </header>
+
+  <main>
+    <section>
+      <h1>{{ langs[lang].new }}</h1>
+      {% for r in records|selectattr("fields.is_new")|sort(attribute="fields." + name_field) %}{{ item(r) }}
+      {% endfor %}
+    </section>
+
+    {% for category, recs in records|groupby("fields." + category_field) %}
+      <section>
+        <h1>{{ category[0] }}</h1> {# why [0] ? #}
+        {% for r in recs|sort(attribute="fields." + name_field) %}{{ item(r) }}
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </main>
+</body>
+
+</html>

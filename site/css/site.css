@@ -1,0 +1,158 @@
+:root {
+  --text-color: rgb(8, 4, 0);
+  --background-color: rgb(248, 248, 248);
+  --gap: 1rem;
+}
+
+html {
+  width: 100%;
+  font-family: sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+body {
+  width: 95%;
+  max-width: 1080px;
+  margin: auto;
+}
+
+body > header {
+  padding-top: var(--gap);
+  padding-bottom: var(--gap);
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  flex-direction: horizontal;
+}
+
+body > header > h1, section > h1, article > h1, article > h2, article > p {
+  margin: unset;
+  padding: unset;
+  font-size: unset;
+  font-weight: unset;
+}
+
+body > header > h1 {
+  font-weight: bolder;
+  flex: 1;
+}
+
+body > header > .logo {
+  height: 100%;
+}
+
+body > header > a > img {
+  height: 100%;
+  width: auto;
+  padding-right: var(--gap);
+}
+
+body > header > a {
+  font-weight: bolder;
+  text-decoration: none;
+  color: unset;
+}
+
+main > section > h1 {
+  padding-top: var(--gap);
+  padding-bottom: var(--gap);
+  background-color: var(--background-color);
+  position: sticky;
+  top: 0;
+}
+
+section > h1 {
+  font-weight: bolder;
+}
+
+article {
+  padding-left: var(--gap);
+  margin-bottom: var(--gap);
+  display: grid;
+  grid-column-gap: var(--gap);
+  grid-template-columns: auto auto auto 1fr 3rem;
+  grid-template-rows: 2fr 1fr 1.5fr;
+  background-color: lightgrey;
+}
+
+article > p {
+  font-size: .75rem;
+}
+
+article > h1 {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  align-self: end;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+article > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+
+article > a > img {
+  width: 100%;
+  height: 100%;
+}
+
+article > h2 {
+  color: grey;
+  text-transform: uppercase;
+  font-size: .5rem;
+  font-weight: bolder;
+  align-self: end;
+}
+
+article > .quantity-header {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+article > .quantity {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+article > .public-header {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+article > .public-price {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+article > .member-header {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+article > .member-price {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
