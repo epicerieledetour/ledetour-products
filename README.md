@@ -23,3 +23,10 @@ Run `./publish.sh` to push the generated site to the production server. Requires
 ### Development server
 
 Run `./serve.sh` to run a development server.
+
+## Edit
+
+Main files to edit:
+- [`site.css`](site/css/site.css) to edit the site style sheet
+- [`at.html`](templates/at.html) to update the main HTML template
+- [`data.json`](static/data.json) to add new translated strings
