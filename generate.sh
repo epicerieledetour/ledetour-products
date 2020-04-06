@@ -10,7 +10,7 @@ HTML_EN=$SITE_EN/index.html
 HTML_FR=$SITE_FR/index.html
 
 AT_AUTH_HEADER="Authorization: Bearer $AT_API_TOKEN"
-AT_ITEMS_URL="https://api.airtable.com/v0/appANF0S1mnPZKQ4r/TEST%20CHARLES%20Articles?filterByFormula=%7Bis_valid%7D"
+AT_ITEMS_URL="https://api.airtable.com/v0/appANF0S1mnPZKQ4r/items?filterByFormula=%7Bis_valid%7D"
 
 AT_BASE_CATEGORIES_OUT=$OUTDIR/at_categories
 AT_BASE_ITEMS_OUT=$OUTDIR/at_items
