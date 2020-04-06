@@ -59,7 +59,11 @@
            alt="Logo"
            async />
     </a>
-    <h1>{{ langs[lang].title }}</h1>
+    <section>
+      <h1>{{ langs[lang].title }}</h1>
+      <p>Prix et disponiblités peuvent varier</p>
+      <footer>{{ langs[lang].last_update }} <time datetime="{{ isodate }}">{{ date }}</time></footer>
+    </section>
     <a href="{{ langs[lang].other_lang_url }}">{{ langs[lang].other_lang_text }}</a>
   </header>
 

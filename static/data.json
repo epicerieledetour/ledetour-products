@@ -8,7 +8,8 @@
       "price_member": "Membre",
       "other_lang_url": "/en",
       "other_lang_text": "en",
-      "quantity": "Quantité"
+      "quantity": "Quantité",
+      "last_update": "Dernière mise à jour le"
     },
     "en": {
       "title": "Products",
@@ -18,7 +19,8 @@
       "price_member": "Member",
       "other_lang_url": "/",
       "other_lang_text": "fr",
-      "quantity": "Quantity"
+      "quantity": "Quantity",
+      "last_update": "Last update"
     }
   }
 }

@@ -16,6 +16,8 @@ AT_BASE_CATEGORIES_OUT=$OUTDIR/at_categories
 AT_BASE_ITEMS_OUT=$OUTDIR/at_items
 AT_ITEMS=$AT_BASE_ITEMS_OUT.json
 
+DATE_DATA=$OUTDIR/date.json
+
 airtable_get() {
   BASE_URL=$1
   BASE_OUT=$2
@@ -48,7 +50,8 @@ mkdir -p $OUTDIR
 airtable_get $AT_ITEMS_URL $AT_BASE_ITEMS_OUT
 
 echo Merging items to $AT_ITEMS and adding additional properties
-jq -s --argfile static_data static/data.json 'reduce .[] as $dot ({}; .records += $dot.records) | . + $static_data | .date = (now|todate)' $AT_BASE_ITEMS_OUT* > $AT_ITEMS
+jq -n ".iso_date = \"`date --iso-8601=minutes`\" | .date = \"`date "+%Y-%m-%d %H:%M:%S"`\"" > $DATE_DATA
+jq -s --argfile static_data static/data.json --argfile date_data  $DATE_DATA 'reduce .[] as $dot ({}; .records += $dot.records) | . + $static_data | . + $date_data' $AT_BASE_ITEMS_OUT* > $AT_ITEMS
 
 echo Export FR page $HTML_FR
 mkdir -p $SITE_FR
