@@ -20,18 +20,25 @@ DATE_DATA=$OUTDIR/date.json
 
 mkdir -p pages
 
-for i in `seq 1 4 1000`
+for i in `seq 1 6 600`
 do
-  v=50
-  printf -v index "%05d" $i
-  printf -v ida "%05d" $(($i + 0))
-  printf -v idb "%05d" $(($i + 1))
-  printf -v idc "%05d" $(($i + 2))
-  printf -v idd "%05d" $(($i + 3))
+  am=25
+  bm=25
+  cm=25
+  dm=25
+  em=10
+  fm=10
+  d=200517
+  printf -v index "%04d" $i
+  printf -v an "$d-%04d" $(($i + 0))
+  printf -v bn "$d-%04d" $(($i + 1))
+  printf -v cn "$d-%04d" $(($i + 2))
+  printf -v dn "$d-%04d" $(($i + 3))
+  printf -v en "$d-%04d" $(($i + 4))
+  printf -v fn "$d-%04d" $(($i + 5))
   json=pages/pages-$index.json
   echo Generating $json
-  jq -n ".a = $v | .ida = \"$ida\" | .b = $v | .idb = \"$idb\" | .c = $v | .idc = \"$idc\" | .d = $v | .idd = \"$idd\"" > $json
-  # jq -n ".iso_date = \"`date --iso-8601=minutes`\" | .date = \"`date "+%Y-%m-%d %H:%M:%S"`\"" > $DATE_DATA
+  jq -n ".am = $am | .an = \"$an\" | .bm = $bm | .bn = \"$bn\" | .cm = $cm | .cn = \"$cn\" | .dm = $dm | .dn = \"$dn\" | .em = $em | .en = \"$en\" | .fm = $fm | .fn = \"$fn\"" > $json
 done
 
 for json in pages/*.json
@@ -41,11 +48,8 @@ do
   echo Making $svg
   python scripts/render-jinja-template.py --template page.svg < $json > $svg
   echo Making $pdf
-  cairosvg $svg -o $pdf
+  cairosvg --dpi 300 --output-width 3300 --output-height 2550 -o $pdf $svg
 done
 
 echo Generating final output pages/bons-achats.pdf
 pdfunite pages/*.pdf pages/bons-achats.pdf
-
-# jq -n ".iso_date = \"`date --iso-8601=minutes`\" | .date = \"`date "+%Y-%m-%d %H:%M:%S"`\"" > $DATE_DATA
-# python scripts/render-jinja-template.py --template $TEMPLATE_FR < $AT_ITEMS > $HTML_FR
