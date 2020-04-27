@@ -1,0 +1,14 @@
+{% macro section(name, els) -%}
+<h2>{{ name }}</h2>
+<ul>
+  {% for el in els | sort %}<li>{{ el }}</li>
+  {% endfor %}
+</ul>
+{%- endmacro %}
+
+<h1>{{ title }}</h1>
+
+{{ section(news_name, lists[news_name]) }}
+
+{% for name, els in lists.items() %}{% if name != news_name %}{{ section(name, els) }}{% endif %}
+{% endfor %}
