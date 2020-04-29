@@ -1,7 +1,7 @@
 {% macro section(name, els) -%}
 <h2>{{ name }}</h2>
 <ul>
-  {% for el in els | sort %}<li>{{ el }}</li>
+  {% for el in els | sort %}<li>{{ el | capitalize }}</li>
   {% endfor %}
 </ul>
 {%- endmacro %}
