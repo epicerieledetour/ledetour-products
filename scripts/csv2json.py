@@ -29,6 +29,7 @@ def csv2json(csvfile, jsonfile):
     lists_it = None
 
     is_first_row = True
+
     for row in reader:
         if is_first_row:
             for fr, en in els(row):
@@ -45,8 +46,8 @@ def csv2json(csvfile, jsonfile):
 
         else:
             for fr, en in els(row):
+                list_fr, list_en = next(lists_it)
                 if fr and en:
-                    list_fr, list_en = next(lists_it)
                     list_fr.append(fr)
                     list_en.append(en)
 
