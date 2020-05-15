@@ -26,8 +26,16 @@ h1, h2, h3, h4, h5, p {
   font-weight: unset;
 }
 
+main > section {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
 main > section > h1 {
-  padding-top: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--background-color);;
 }
 
 .title {
