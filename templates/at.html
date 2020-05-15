@@ -3,6 +3,9 @@
 
 {% macro item(record) -%}
 <div class="square">
+  {% if record.fields.photo %}
+  <a href="{{ record.fields.photo[0].thumbnails.full.url }}">
+  {% endif %}
   <article>
 
     {% if record.fields.photo %}
@@ -30,6 +33,9 @@
     </header>
 
   </article>
+  {% if record.fields.photo %}
+  </a>
+  {% endif %}
 </div>
 {%- endmacro %}
 
@@ -91,22 +97,3 @@
 </body>
 
 </html>
-
-{#
-{% if record.fields.quantity %}
-<h2 class="quantity-header">{{ langs[lang].quantity }}</h2>
-<p class="quantity">{{ record.fields.quantity }}</p>
-{% endif %}
-
-{% if record.fields.price_public %}
-<h2 class="public-header">{{ langs[lang].price_public }}</h2>
-<p class="public-price">{{ record.fields.price_public }}$</p>
-{% endif %}
-
-{% if record.fields.price_member %}
-<h2 class="member-header">{{ langs[lang].price_member }}</h2>
-<p class="member-price">{{ record.fields.price_member }}$</p>
-{% endif %}
-#}
-
-{# <a href="{{ record.fields.photo[0].thumbnails.full.url }}"> #}
