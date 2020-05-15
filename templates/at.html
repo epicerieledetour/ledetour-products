@@ -2,33 +2,35 @@
 {% set category_field = "category_" + lang %}
 
 {% macro item(record) -%}
-<article>
-  <h1>{{ record.fields[name_field] }}</h1>
+<div class="square">
+  <article>
 
-  {% if record.fields.photo %}
-  <a href="{{ record.fields.photo[0].thumbnails.full.url }}">
-    <img src="{{ record.fields.photo[0].thumbnails.large.url }}"
-         width="{{ record.fields.photo[0].thumbnails.large.width }}"
-         height="{{ record.fields.photo[0].thumbnails.large.height }}"
-         async />
-  </a>
-  {% endif %}
+    {% if record.fields.photo %}
+      <img src="{{ record.fields.photo[0].thumbnails.large.url }}"
+           width="{{ record.fields.photo[0].thumbnails.large.width }}"
+           height="{{ record.fields.photo[0].thumbnails.large.height }}"
+           async />
+    {% endif %}
 
-  {% if record.fields.quantity %}
-  <h2 class="quantity-header">{{ langs[lang].quantity }}</h2>
-  <p class="quantity">{{ record.fields.quantity }}</p>
-  {% endif %}
+    <header>
+      <h1>{{ record.fields[name_field] }}</h1>
+      <p>
+        {% if record.fields.price_member %}
+        <span>{{ '%.02f' % record.fields.price_member }}$</span>
+        {% endif %}
 
-  {% if record.fields.price_public %}
-  <h2 class="public-header">{{ langs[lang].price_public }}</h2>
-  <p class="public-price">{{ record.fields.price_public }}$</p>
-  {% endif %}
+        {% if record.fields.price_public %}
+        <span> ({{ '%.02f' % record.fields.price_public }}$)</span>
+        {% endif %}
 
-  {% if record.fields.price_member %}
-  <h2 class="member-header">{{ langs[lang].price_member }}</h2>
-  <p class="member-price">{{ record.fields.price_member }}$</p>
-  {% endif %}
-</article>
+        {% if record.fields.quantity %}
+        <span>{{ record.fields.quantity }}</span>
+        {% endif %}
+      </p>
+    </header>
+
+  </article>
+</div>
 {%- endmacro %}
 
 <html lang="{{ lang }}">
@@ -42,7 +44,7 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="/icon.png">
 
-  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="st ylesheet" href="/css/normalize.css">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/site.css">
 
@@ -50,7 +52,7 @@
 </head>
 
 <body>
-  <header>
+  <header class="title">
     <a class="logo"
        href="https://epicerieledetour.org">
       <img src="https://epicerieledetour.org/wp-content/uploads/2018/05/logo_le-detour-8.png"
@@ -70,18 +72,41 @@
   <main>
     <section>
       <h1>{{ langs[lang].new }}</h1>
+      <div class="grid">
       {% for r in records|selectattr("fields.is_new")|sort(attribute="fields." + name_field) %}{{ item(r) }}
       {% endfor %}
+      </div>
     </section>
 
     {% for category, recs in records|groupby("fields." + category_field) %}
       <section>
         <h1>{{ category[0] }}</h1> {# why [0] ? #}
-        {% for r in recs|sort(attribute="fields." + name_field) %}{{ item(r) }}
-        {% endfor %}
+        <div class="grid">
+          {% for r in recs|sort(attribute="fields." + name_field) %}{{ item(r) }}
+          {% endfor %}
+        </div>
       </section>
     {% endfor %}
   </main>
 </body>
 
 </html>
+
+{#
+{% if record.fields.quantity %}
+<h2 class="quantity-header">{{ langs[lang].quantity }}</h2>
+<p class="quantity">{{ record.fields.quantity }}</p>
+{% endif %}
+
+{% if record.fields.price_public %}
+<h2 class="public-header">{{ langs[lang].price_public }}</h2>
+<p class="public-price">{{ record.fields.price_public }}$</p>
+{% endif %}
+
+{% if record.fields.price_member %}
+<h2 class="member-header">{{ langs[lang].price_member }}</h2>
+<p class="member-price">{{ record.fields.price_member }}$</p>
+{% endif %}
+#}
+
+{# <a href="{{ record.fields.photo[0].thumbnails.full.url }}"> #}
