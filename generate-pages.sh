@@ -1,26 +1,8 @@
 #!/bin/bash
 
-TEMPLATESDIR=templates
-TEMPLATE_EN=at-en.html
-TEMPLATE_FR=at-fr.html
-OUTDIR=build
-SITE_EN=site/en
-SITE_FR=site
-HTML_EN=$SITE_EN/index.html
-HTML_FR=$SITE_FR/index.html
-
-AT_AUTH_HEADER="Authorization: Bearer $AT_API_TOKEN"
-AT_ITEMS_URL="https://api.airtable.com/v0/appANF0S1mnPZKQ4r/items?filterByFormula=%7Bis_valid%7D"
-
-AT_BASE_CATEGORIES_OUT=$OUTDIR/at_categories
-AT_BASE_ITEMS_OUT=$OUTDIR/at_items
-AT_ITEMS=$AT_BASE_ITEMS_OUT.json
-
-DATE_DATA=$OUTDIR/date.json
-
 mkdir -p pages
 
-for i in `seq 1 6 42`
+for i in `seq 1 6 204`
 do
   am=25
   bm=25
@@ -28,9 +10,9 @@ do
   dm=25
   em=25
   fm=25
-  d=200531
-  dfr="Expire le 31 mai 2020"
-  den="Expires on 31st of May, 2020"
+  d=200601
+  dfr="Expire le 30 juin 2020"
+  den="Expires 30th of June, 2020"
   printf -v index "%04d" $i
   printf -v an "$d-%04d" $(($i + 0))
   printf -v bn "$d-%04d" $(($i + 1))
