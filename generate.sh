@@ -13,7 +13,7 @@ CSV=$OUTDIR/data.csv
 JSON=$OUTDIR/data.json
 
 mkdir -p $OUTDIR
-curl -s "$CSV_URL" > $CSV
+wget -O $CSV "$CSV_URL"
 python scripts/csv2json.py < $CSV > $JSON
 python scripts/render-jinja-template.py --template $TEMPLATE_FR < $JSON > $HTML_FR
 python scripts/render-jinja-template.py --template $TEMPLATE_EN < $JSON > $HTML_EN
